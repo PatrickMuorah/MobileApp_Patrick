@@ -1,0 +1,36 @@
+Generate a single-file FastAPI app (main.py) for an in-memory CRUD API that tracks
+vehicle manufacturers and their vehicles.
+
+REQUIREMENTS:
+- Use Python, FastAPI, and Pydantic v2 (BaseModel, Field). No database — use plain
+  Python dicts/lists to store data in memory.
+- Data models:
+    Manufacturer: id (int), name (str), country (str)
+    Vehicle: id (int), manufacturer_id (int), model (str), year (int), price (float)
+- Seed the data with 3 manufacturers and 6 vehicles at startup.
+
+ENDPOINTS (all CRUD + one relationship query):
+
+Manufacturers:
+  GET    /manufacturers                       → list all
+  GET    /manufacturers/{id}                  → get one (404 if missing)
+  POST   /manufacturers                       → create (201)
+  PUT    /manufacturers/{id}                  → update (404 if missing)
+  DELETE /manufacturers/{id}                  → delete (204, 404 if missing)
+  GET    /manufacturers/{id}/vehicles         → vehicles of one manufacturer
+
+Vehicles:
+  GET    /vehicles                            → list all
+  GET    /vehicles/{id}                       → get one (404 if missing)
+  POST   /vehicles                            → create (201; 400 if manufacturer_id invalid)
+  PUT    /vehicles/{id}                       → update (404 if missing)
+  DELETE /vehicles/{id}                       → delete (204, 404 if missing)
+
+RULES:
+- Use HTTPException for errors with clear messages.
+- Include a root GET / that returns {"message": "Vehicle API is running"}.
+- Add type hints and brief comments.
+- Auto-increment IDs using a simple counter.
+
+OUTPUT: only ONE fenced Python code block containing the complete main.py.
+Do not split into multiple files. Do not truncate.
